@@ -69,5 +69,18 @@ public class FightTest{
     assertEquals( 6, fight.pointsFromDefence() );
   }
 
+  @Test
+  public void hasAttackPercentage() {
+    for ( int i = 0; i < 12; i++ ) {
+      fight.scorePoint(point1);
+    }
+    for ( int i = 0; i < 3; i++ ) {
+      fight.scorePoint(point2);
+    }
+    assertEquals( 12, fight.pointsFromAttacks() );
+    assertEquals( 3, fight.pointsFromDefence() );
+    assertEquals( 80, fight.percentagePointsFromAttacks() );
+  }
+
 
 }

@@ -13,15 +13,12 @@ public class Fight {
   }
 
   public int getScore() {
-
     int totalPoints = 0;
-
     for ( int i = 0; i < 15; i++ ) {
       if (score[i] != null){
         totalPoints++;
       }
     }
-
     return totalPoints;
   }
 
@@ -36,29 +33,28 @@ public class Fight {
   }
 
   public int pointsFromAttacks() {
-
     int pointsFromAttacks = 0;
-
     for ( int i = 0; i < 15; i++ ) {
       if (score[i].getType() == "attack") {
         pointsFromAttacks++;
       }
     }
-
     return pointsFromAttacks;
   }
 
   public int pointsFromDefence() {
-
     int pointsFromDefence = 0;
-
     for ( int i = 0; i < 15; i++ ) {
       if (score[i].getType() == "defence") {
         pointsFromDefence++;
       }
     }
-
     return pointsFromDefence;
+  }
+
+  public int percentagePointsFromAttacks() {
+    int attackPercentage = (int) Math.round((pointsFromAttacks() / getScore()) * 100.00);
+    return attackPercentage;
   }
 
 }
