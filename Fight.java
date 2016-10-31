@@ -26,6 +26,7 @@ public class Fight {
   }
 
   public void scorePoint(Point point) {
+    if(fightWon()) return;
     int totalPoints = getScore();
     score[totalPoints] = point;
   }

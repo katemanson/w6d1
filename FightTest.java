@@ -31,11 +31,20 @@ public class FightTest{
 
   @Test
   public void canWinFight() {
-    for ( int i = 0; i < 15 ; i++ ) {
+    for ( int i = 0; i < 15; i++ ) {
       fight.scorePoint(point1);
     }
-    assertEquals(15, fight.getScore() );
-    assertEquals(true, fight.fightWon() );
+    assertEquals( 15, fight.getScore() );
+    assertEquals( true, fight.fightWon() );
+  }
+
+  @Test
+  public void cantScoreMoreThan15() {
+    for ( int i = 0; i < 20; i++ ) {
+      fight.scorePoint(point1);
+    }
+    assertEquals( 15, fight.getScore() );
+    assertEquals( true, fight.fightWon() );
   }
 
   @Test
