@@ -3,14 +3,14 @@ import org.junit.*;
 
 public class FightTest{
   Fight fight;
-  Point point1;
-  Point point2;
+  Attack attack;
+  Defence defence;
 
   @Before
   public void before() {
     fight = new Fight("Final");
-    point1 = new Point("attack");
-    point2 = new Point("defence");
+    attack = new Attack();
+    defence = new Defence();
   }
 
   @Test
@@ -25,14 +25,14 @@ public class FightTest{
 
   @Test
   public void canScorePoint() {
-    fight.scorePoint(point1);
+    fight.scorePoint(attack);
     assertEquals( 1, fight.getScore() );
   }
 
   @Test
   public void canWinFight() {
     for ( int i = 0; i < 15; i++ ) {
-      fight.scorePoint(point1);
+      fight.scorePoint(attack);
     }
     assertEquals( 15, fight.getScore() );
     assertEquals( true, fight.fightWon() );
@@ -41,7 +41,7 @@ public class FightTest{
   @Test
   public void cantScoreMoreThan15() {
     for ( int i = 0; i < 20; i++ ) {
-      fight.scorePoint(point1);
+      fight.scorePoint(attack);
     }
     assertEquals( 15, fight.getScore() );
     assertEquals( true, fight.fightWon() );
@@ -50,10 +50,10 @@ public class FightTest{
   @Test
   public void countPointsFromAttacks() {
     for ( int i = 0; i < 8; i++ ) {
-      fight.scorePoint(point1);
+      fight.scorePoint(attack);
     }
     for ( int i = 0; i < 7; i++ ) {
-      fight.scorePoint(point2);
+      fight.scorePoint(defence);
     }
     assertEquals( 8, fight.pointsFromAttacks() );
   }
@@ -61,26 +61,27 @@ public class FightTest{
   @Test
   public void countPointsFromDefence() {
     for ( int i = 0; i < 6; i++ ) {
-      fight.scorePoint(point2);
-    }
-    for ( int i = 0; i < 9; i++ ) {
-      fight.scorePoint(point1);
+      fight.scorePoint(defence);
     }
     assertEquals( 6, fight.pointsFromDefence() );
   }
 
   @Test
-  public void hasAttackPercentage() {
-    for ( int i = 0; i < 12; i++ ) {
-      fight.scorePoint(point1);
+  public void givesAttackPercentage() 
+  {
+    for ( int i = 0; i < 10; i++ ) 
+    {
+      fight.scorePoint(attack);
     }
-    for ( int i = 0; i < 3; i++ ) {
-      fight.scorePoint(point2);
+    for ( int i = 0; i < 5; i++ ) 
+    {
+      fight.scorePoint(defence);
     }
-    assertEquals( 12, fight.pointsFromAttacks() );
-    assertEquals( 3, fight.pointsFromDefence() );
-    assertEquals( 80, fight.percentagePointsFromAttacks() );
+    assertEquals( 10, fight.pointsFromAttacks() );
+    assertEquals( 5, fight.pointsFromDefence() );
+    assertEquals( 15, fight.getScore() );
+    assertEquals( true, fight.fightWon() );
+    assertEquals( 66.67, (fight.percentagePointsFromAttacks()), 1 );
   }
-
 
 }

@@ -1,13 +1,18 @@
-class Point {
-  
-  private String type;
+public interface Point {
 
-  public Point(String type){
-    this.type = type;
-  }
-
-  public String getType() {
-    return this.type;
-  }
-  
 }
+
+
+//   class Point {
+  
+//   private String type;
+
+//   public Point(String type){
+//     this.type = type;
+//   }
+
+//   public String getType() {
+//     return this.type;
+//   }
+  
+// }

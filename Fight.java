@@ -1,11 +1,13 @@
+import java.util.*;
+
 public class Fight {
 
   private String round;
-  private Point[] score; 
+  private ArrayList<Point> score; 
 
   public Fight(String round) {
     this.round = round;
-    this.score = new Point[15];
+    this.score = new ArrayList<Point>();
   }
 
   public String getRound() {
@@ -13,48 +15,41 @@ public class Fight {
   }
 
   public int getScore() {
-    int totalPoints = 0;
-    for ( int i = 0; i < 15; i++ ) {
-      if (score[i] != null){
-        totalPoints++;
-      }
-    }
-    return totalPoints;
+    return this.score.size();
   }
 
   public void scorePoint(Point point) {
-    if(fightWon()) return;
-    int totalPoints = getScore();
-    score[totalPoints] = point;
+    if ( fightWon() ) return;
+    this.score.add(point);
   }
 
   public boolean fightWon() {
-    return getScore() >= score.length;
+    return getScore() >= 15;
   }
 
   public int pointsFromAttacks() {
-    int pointsFromAttacks = 0;
-    for ( int i = 0; i < 15; i++ ) {
-      if (score[i].getType() == "attack") {
-        pointsFromAttacks++;
+    int total = 0;
+    for ( int i = 0; i < getScore(); i++ ) {
+      if ( score.get(i) instanceof Attack ) {
+        total += 1;
       }
     }
-    return pointsFromAttacks;
+    return total; 
   }
 
   public int pointsFromDefence() {
-    int pointsFromDefence = 0;
-    for ( int i = 0; i < 15; i++ ) {
-      if (score[i].getType() == "defence") {
-        pointsFromDefence++;
+    int total = 0;
+    for ( int i = 0; i < getScore(); i++ ) {
+      if ( score.get(i) instanceof Defence ) {
+        total += 1;
       }
     }
-    return pointsFromDefence;
+    return total;
   }
 
-  public int percentagePointsFromAttacks() {
-    int attackPercentage = (int) Math.round((pointsFromAttacks() / getScore()) * 100.00);
-    return attackPercentage;
+  public double percentagePointsFromAttacks() {
+    double percentage = (double) (pointsFromAttacks() * 100) / getScore();
+    return percentage;
   }
 
 }
